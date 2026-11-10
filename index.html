@@ -743,6 +743,69 @@
       initNewInvoiceForm();
     }
 
+    function saveCurrentInvoice() {
+      const custName = document.getElementById('custNameInput').value.trim();
+      if (!custName) {
+        alert("Sila masukkan Nama Pelanggan sebelum menyimpan invois!");
+        document.getElementById('custNameInput').focus();
+        return;
+      }
+
+      const invId = document.getElementById('invNumInput').value || 'INV-000';
+      const custPhone = document.getElementById('custPhoneInput').value.trim();
+      const custAddr = document.getElementById('custAddrInput').value.trim();
+      const dateVal = document.getElementById('invDateInput').value;
+      const statusVal = document.getElementById('invStatusInput').value;
+      const discountVal = parseFloat(document.getElementById('discountInput').value) || 0;
+
+      let subtotal = 0;
+      currentInvoice.items.forEach(item => {
+        subtotal += (item.qty || 0) * (item.price || 0);
+      });
+      const grandTotal = Math.max(0, subtotal - discountVal + (currentInvoice.transportFee || 0));
+
+      const recordData = {
+        id: invId,
+        custName: custName,
+        custPhone: custPhone,
+        custAddr: custAddr,
+        date: dateVal,
+        status: statusVal,
+        items: currentInvoice.items,
+        transportFee: currentInvoice.transportFee || 0,
+        discount: discountVal,
+        grandTotal: grandTotal,
+        savedAt: new Date().toISOString()
+      };
+
+      // 1. Simpan ke Local Storage (Rekod Invois)
+      let history = [];
+      try {
+        history = JSON.parse(localStorage.getItem('nexatech_history') || '[]');
+      } catch(e){}
+
+      // Gantikan jika invois id dah ada, atau tambah baru
+      const existingIdx = history.findIndex(h => h.id === invId);
+      if (existingIdx >= 0) {
+        history[existingIdx] = recordData;
+      } else {
+        history.unshift(recordData);
+      }
+      localStorage.setItem('nexatech_history', JSON.stringify(history));
+
+      // 2. Hantar ke Google Sheets (jika pautan Web App Script dimasukkan)
+      if (appConfig.sheetUrl && appConfig.sheetUrl.startsWith('http')) {
+        fetch(appConfig.sheetUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(recordData)
+        }).catch(err => console.log('Google Sheets Sync Error:', err));
+      }
+
+      alert(`✅ Invois ${invId} bagi ${custName} BERJAYA DISIMPAN!\n\nAnda boleh semak atau buka semula invois ini pada butang "Rekod Invois".`);
+    }
+
     function openSettingsModal() {
       applyCompanyConfigToUI();
       renderPresetManagerList();
