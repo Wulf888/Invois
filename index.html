@@ -59,6 +59,11 @@
     .light-invoice-preview .table-header {
       background-color: #e2e8f0 !important;
     }
+    .light-invoice-preview #dispDocBadge {
+      background-color: #e6f4ea !important;
+      color: #137333 !important;
+      border: 1px solid #ceead6 !important;
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased">
@@ -215,11 +220,11 @@
             <p id="invCompAddr" class="text-xs text-slate-400 mt-1 max-w-sm whitespace-pre-line">No 123, Jalan Fiber 1, Bandar Cyber, Selangor</p>
             <p id="invCompContact" class="text-xs text-cyan-400 mt-1 font-mono">Tel: 012-3456789 | Email: nexatech@example.com</p>
           </div>
-          <div class="text-right">
-            <span id="dispDocBadge" class="px-3 py-1 bg-cyan-950 border border-cyan-500/30 text-cyan-400 font-extrabold text-xs tracking-widest rounded-full uppercase">INVOIS</span>
-            <p id="dispInvNum" class="text-sm font-mono font-bold text-amber-400 mt-2">INV-202611-001</p>
-            <p class="text-xs text-slate-400 mt-0.5">Tarikh: <span id="dispInvDate" class="text-slate-200">09/11/2026</span></p>
-            <p class="text-xs text-slate-400 mt-0.5">Status: <span id="dispInvStatus" class="font-bold text-amber-400">Belum Bayar (Unpaid)</span></p>
+          <div class="text-right flex flex-col items-end justify-start min-w-[140px]">
+            <span id="dispDocBadge" class="inline-block px-2.5 py-1 bg-cyan-950 border border-cyan-500/30 text-cyan-400 font-extrabold text-[10px] tracking-wider rounded-md uppercase whitespace-nowrap">INVOIS</span>
+            <p id="dispInvNum" class="text-xs font-mono font-bold text-amber-400 mt-1.5 whitespace-nowrap">INV-202611-001</p>
+            <p class="text-[11px] text-slate-400 mt-0.5 whitespace-nowrap">Tarikh: <span id="dispInvDate" class="text-slate-200 font-medium">09/11/2026</span></p>
+            <p class="text-[11px] text-slate-400 mt-0.5 whitespace-nowrap">Status: <span id="dispInvStatus" class="font-bold text-amber-400">Belum Bayar (Unpaid)</span></p>
           </div>
         </div>
 
@@ -491,7 +496,7 @@
         btnInv.className = "py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
         lblDocNum.innerText = "No. Resit";
         dispBadge.innerText = "RESIT RASMI";
-        dispBadge.className = "px-3 py-1 bg-emerald-950 border border-emerald-500/30 text-emerald-400 font-extrabold text-xs tracking-widest rounded-full uppercase";
+        dispBadge.className = "inline-block px-2.5 py-1 bg-emerald-950 border border-emerald-500/30 text-emerald-400 font-extrabold text-[10px] tracking-wider rounded-md uppercase whitespace-nowrap";
         lblCustHeader.innerText = "Diterima Daripada:";
         lblTotalText.innerText = "JUMLAH DITERIMA:";
         statusSelect.value = "Lunas (Paid)";
@@ -500,7 +505,7 @@
         btnRec.className = "py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
         lblDocNum.innerText = "No. Invois";
         dispBadge.innerText = "INVOIS";
-        dispBadge.className = "px-3 py-1 bg-cyan-950 border border-cyan-500/30 text-cyan-400 font-extrabold text-xs tracking-widest rounded-full uppercase";
+        dispBadge.className = "inline-block px-2.5 py-1 bg-cyan-950 border border-cyan-500/30 text-cyan-400 font-extrabold text-[10px] tracking-wider rounded-md uppercase whitespace-nowrap";
         lblCustHeader.innerText = "Dibilkan Kepada:";
         lblTotalText.innerText = "JUMLAH KESELURUHAN:";
         statusSelect.value = "Belum Bayar (Unpaid)";
