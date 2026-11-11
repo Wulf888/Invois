@@ -983,8 +983,13 @@
       
       if (!target) return;
       
+      // Set fixed width for professional layout on mobile renders
+      const originalWidth = target.style.width;
+      target.style.width = '650px';
+
       if (window.html2canvas) {
-        html2canvas(target, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
+        html2canvas(target, { scale: 2, backgroundColor: '#ffffff', width: 650 }).then(canvas => {
+          target.style.width = originalWidth; // Restore original styling
           const imgData = canvas.toDataURL('image/png');
           
           if (imgOutput && imgContainer) {
@@ -1000,9 +1005,11 @@
           link.click();
           document.body.removeChild(link);
         }).catch(err => {
+          target.style.width = originalWidth;
           alert("Gagal menjana gambar dokumen.");
         });
       } else {
+        target.style.width = originalWidth;
         alert("Pustaka penjana imej sedang dimuatkan, sila cuba sebentar lagi.");
       }
     }
