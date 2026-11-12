@@ -512,7 +512,7 @@
       if (type === 'QUOTATION') {
         btnQuo.className = "py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow";
         lblDocNum.innerText = "No. Quotation";
-        dispBadge.innerText = "SEBUT HARGA (QUOTATION)";
+        dispBadge.innerText = "QUOTATION";
         dispBadge.className = "inline-block px-2.5 py-1 bg-indigo-950 border border-indigo-500/30 text-indigo-400 font-extrabold text-[10px] tracking-wider rounded-md uppercase whitespace-nowrap";
         lblCustHeader.innerText = "Disediakan Untuk:";
         lblTotalText.innerText = "ANGGARAN KOS KESELURUHAN:";
@@ -1038,10 +1038,10 @@
         custLabel = 'Diterima Daripada:';
         totalLabel = 'JUMLAH DITERIMA';
       } else if (isQuotation) {
-        docTitle = '*SEBUT HARGA (QUOTATION)*';
+        docTitle = '*QUOTATION*';
         custLabel = 'Disediakan Untuk:';
         totalLabel = 'ANGGARAN KOS KESELURUHAN';
-        closingTxt = 'Sila maklumkan kepada kami sekiranya anda bersetuju dengan sebut harga ini. Terima kasih!';
+        closingTxt = 'Sila maklumkan kepada kami sekiranya anda bersetuju dengan quotation ini. Terima kasih!';
       }
 
       return `${docTitle}\n*${appConfig.compName.toUpperCase()}*\nNo. Dokumen: *${docNum}*\nTarikh: ${dateVal}\nStatus: ${statusVal}\n\n${custLabel} *${name}*\n----------------------------------\n${itemsTxt}----------------------------------\n*${totalLabel}: ${grandTotal}*\n\n${closingTxt}`;
@@ -1059,7 +1059,7 @@
       const docNum = document.getElementById('invNumInput').value || 'DOC-000';
       let docLabel = 'Invois Perkhidmatan';
       if (currentDocType === 'RECEIPT') docLabel = 'Resit Bayaran';
-      else if (currentDocType === 'QUOTATION') docLabel = 'Sebut Harga (Quotation)';
+      else if (currentDocType === 'QUOTATION') docLabel = 'Quotation';
 
       const subject = encodeURIComponent(`${docLabel} WiFi & Fiber Optik [${docNum}] - ${appConfig.compName}`);
       const body = encodeURIComponent(buildInvoiceTextMessage());
